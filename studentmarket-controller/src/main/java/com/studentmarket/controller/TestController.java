@@ -20,17 +20,14 @@ public class TestController {
 	
 	@RequestMapping("test.do")
 	public String test(String username,String password){
-//		System.out.println(username);
-//		System.out.println(password);
-//		Citizen citizen = new Citizen();
-//		citizen.setTelephoneNumber(username);
-//		citizen.setPassword(password);
-//		Citizen test = testService.test(citizen);
-//		if(test==null)return "failure";
-//		else return "success";
-		System.out.println("ee00");
-		testService.test(new Citizen());
-		return "success";
+		System.out.println(username);
+		System.out.println(password);
+		Citizen citizen = new Citizen();
+		citizen.setTelephoneNumber(username);
+		citizen.setPassword(password);
+		Citizen test = testService.test(citizen);
+		if(test==null)return "failure";
+		else return "success";
 
 	}
 	@RequestMapping(value="test2")
