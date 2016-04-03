@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.studentmarket.dao.ICitizenDao">
+
+	<!-- 定义resultMap和数据库对应 -->
+     <resultMap type="com.studentmarket.entity.Citizen" id="citizenResultMap">
+     	<id column="telephone_number" property="telephoneNumber"/>
+     	<result property="citizenName" column="citizen_name"/>
+     </resultMap>
+
+	<!-- 验证用户 -->
+	<select id="loginCheck" parameterType="com.studentmarket.entity.Citizen" resultMap="citizenResultMap">
+		select * from table_citizen where telephone_number=#{telephoneNumber} and password=#{password} 
+		and state=1 and flag=1
+	</select>
+	
+	<!-- 注册用户 -->
+	<insert id="regist" parameterType="com.studentmarket.entity.Citizen" >
+		insert into table_citizen (telephone_number,citizen_name,state,password,integrate,flag) 
+		values (#{telephoneNumber},#{telephoneNumber},1,#{password},0,1)
+	</insert>
+	
+	<!-- 通过电话查找用户用户 -->
+	<select id="getCitizenByTel" parameterType="com.studentmarket.entity.Citizen" resultMap="citizenResultMap">
+		select * from table_citizen where telephone_number=#{value}
+	</select>
+	
+	<!-- 查看积分排行榜 -->
+	<select id="showIntegrate" resultMap="citizenResultMap">
+		select * from table_citizen order by integrate
+	</select>
+</mapper> 
